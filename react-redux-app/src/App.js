@@ -1,20 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import  { increment } from './actions';
+import Map from './components/map/Map';
 import './App.css';
 
-function App() { 
-  const counter = useSelector(state => state.counter);
-  const isLogged = useSelector(state => state.isLogged);
-  const dispatch = useDispatch();
-
+function App() {
   return (
     <div>
-       <div className="App">
-      Hello World {counter}
-    </div>
-
-    <button onClick={()=> dispatch(increment())}>+</button>
+      <Map></Map>
     </div>
   );
 }
