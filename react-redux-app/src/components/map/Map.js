@@ -73,9 +73,9 @@ export default class Map extends Component {
     _updatePoint = () => {
         counter = 0;
         let fromLatitude = originLatitude;
-        originLatitude += factor;
         let toLatitude = originLatitude + factor;
         this._getDistance(originLongitude, fromLatitude, toLatitude);
+        originLatitude += factor;
     }
 
     _getDistance = (originLongitude, fromLatitude, toLatitude) => {
@@ -120,13 +120,12 @@ export default class Map extends Component {
 
     render() {
         const { viewport, pointData, routeData } = this.state;
-
         return (
             <div>
                 <MapGL
                     {...viewport}
-                    width="1200px"
-                    height="750px"
+                    width="1000px"
+                    height="550px"
                     mapboxApiAccessToken={this.TOKEN}
                     onViewportChange={this._onViewportChange}
                 >
@@ -141,10 +140,13 @@ export default class Map extends Component {
                             <Layer {...routeLayer} />
                         </Source>
                     )}
-                </MapGL>
-                <button onClick={this._updatePoint}>Click</button>
+                </MapGL><br/>
+                <button onClick={this._updatePoint}>Click</button><br/>
+                <div>
+                    <span>From {originLongitude}</span> &nbsp; &nbsp; 
+                    <span>To {originLatitude}</span>
+                </div>
             </div>
-
         );
     }
 }
