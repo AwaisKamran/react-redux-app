@@ -55,6 +55,7 @@ export default class Map extends Component {
                 this.setState({
                     pointData: {
                         type: 'Point',
+                        properties: this._calculateTurf(),
                         coordinates: this.state.routeData.features[0].geometry.coordinates[counter++]
                     }
                 });
@@ -63,12 +64,25 @@ export default class Map extends Component {
             this.setState({
                 pointData: {
                     type: 'Point',
+                    properties: {},
                     coordinates: [originLongitude, originLatitude]
                 }
             });
         }
         this.animation = window.requestAnimationFrame(this._animatePoint);
     };
+
+    _calculateTurf(){
+        var existingPoint = this.state.routeData.features[0].geometry.coordinates[counter];
+        var toPoint = this.state.routeData.features[0].geometry.coordinates[counter + 1];
+        if(existingPoint && toPoint){
+            return turf.bearing(
+                turf.point(existingPoint),
+                turf.point(toPoint)
+            );
+        }
+        else return {};
+    }
 
     _updatePoint = () => {
         counter = 0;
