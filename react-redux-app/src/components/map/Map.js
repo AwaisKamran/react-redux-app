@@ -16,7 +16,7 @@ const routeLayer = {
     source: 'route',
     type: 'line',
     paint: {
-        'line-width': 1,
+        'line-width': 0.5,
         'line-color': '#007cbf'
     }
 }
